@@ -40,7 +40,8 @@
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
     "passport-google-oauth": "^1.0.0",
-    "sequelize": "^4.38.0"
+    "sequelize": "^4.38.1",
+    "sequelize-cli": "^4.1.1"
   },
   "devDependencies": {
     "babel-eslint": "^9.0.0",
