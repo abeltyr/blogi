@@ -25,6 +25,6 @@ module.exports = {
         type: Sequelize.DATE
       }
     }),
-  //eslint-disable-line
+  // eslint-disable-next-line
   down: (queryInterface, Sequelize) => queryInterface.dropTable("follow_users")
 };

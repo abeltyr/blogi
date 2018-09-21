@@ -1,7 +1,6 @@
-"use strict";
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("follow_categories", {
+  up: (queryInterface, Sequelize) =>
+    queryInterface.createTable("follow_categories", {
       id: {
         allowNull: false,
         autoIncrement: false,
@@ -25,8 +24,8 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
-  },
+    }),
+  // eslint-disable-next-line
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable("follow_categories");
   }
