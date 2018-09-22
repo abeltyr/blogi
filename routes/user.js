@@ -114,8 +114,6 @@ app.get("/facebook/callback", (req, res, next) => {
 
 // google callback
 
-// having trouble with the link so changed it to an email
-
 app.get("/google/callback", (req, res, next) => {
   // eslint-disable-next-line consistent-return
   passport.authenticate("google", (err, user) => {
@@ -139,7 +137,8 @@ app.get("/google/callback", (req, res, next) => {
           // eslint-disable-next-line no-underscore-dangle
           image: user._json.image.url,
           email: user.emails[0].value,
-          expire_date: toString(Date())
+          issued_date: Date(),
+          expired_date: Date() // add the expire date for the token from the env
         };
         return res.json({
           access_token: jwt.sign(body, process.env.SECRET),

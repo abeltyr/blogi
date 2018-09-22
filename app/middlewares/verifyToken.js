@@ -6,6 +6,7 @@ function verifyToken(req, res, next) {
       if (err) {
         res.status(401).send("invalid token provided");
       }
+      // todo add the expire date for the token to verify
       req.user = doc;
       next();
     });
