@@ -19,18 +19,36 @@ exports.list_all = (req, res) => {
 
 exports.New_comment = (req, res) => {
   db.comment
-    .findOrCreate({
+    .findOne({
       where: {
         user_id: req.user.id,
-        comments: req.body.comments,
-        blog_id: req.body.blog_id,
-        name: req.user.full_name,
-        image: req.user.image
+        blog_id: req.body.blog_id
       }
     })
-    .then(doc => res.send(doc))
-    .catch(er => {
-      res.status(500).json(er.errors);
+    .then(data => {
+      if (data) {
+        res.json("one comment per person");
+      } else {
+        db.comment
+          .findOrCreate({
+            where: {
+              user_id: req.user.id,
+              comments: req.body.comments,
+              blog_id: req.body.blog_id,
+              name: req.user.full_name,
+              image: req.user.image
+            }
+          })
+          .then(doc => res.send(doc))
+          .catch(error => {
+            debug(error);
+            res.status(500).json(error);
+          });
+      }
+    })
+    .catch(error => {
+      debug(error);
+      res.status(500).json(error);
     });
 };
 
