@@ -7,6 +7,7 @@ const express = require("express");
 const debug = require("debug")("app");
 const blog = require("./routes/blog");
 const follow = require("./routes/follow");
+const FeedBack = require("./routes/FeedBack");
 
 // security middleware
 const security = require("./app/middlewares/security");
@@ -25,6 +26,7 @@ app.use(bodyParser.json());
 // plug the routers here for the individual components
 app.use("/api/blog", blog);
 app.use("/api/", follow);
+app.use("/api/feedback", FeedBack);
 
 // Start listening for connections
 app.listen(process.env.APP_PORT ? process.env.APP_PORT : 3000, err => {
