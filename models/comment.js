@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const blog = sequelize.define(
-    "blog",
+  const comment = sequelize.define(
+    "comment",
     {
       id: {
         allowNull: false,
@@ -16,21 +16,28 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: true
         }
       },
-      title: {
+      blog_id: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        validate: {
+          notEmpty: true
+        }
+      },
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: true
         }
       },
-      category: {
+      image: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: true
         }
       },
-      content: {
+      comments: {
         type: DataTypes.TEXT,
         allowNull: false,
         validate: {
@@ -41,8 +48,8 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   // eslint-disable-next-line
-  blog.associate = function(models) {
+  comment.associate = models => {
     // associations can be defined here
   };
-  return blog;
+  return comment;
 };
