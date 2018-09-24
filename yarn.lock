@@ -574,7 +574,7 @@ debug@3.1.0:
   dependencies:
     ms "2.0.0"
 
-debug@^3.1.0:
+debug@^3.1.0, debug@^3.2.5:
   version "3.2.5"
   resolved "https://registry.yarnpkg.com/debug/-/debug-3.2.5.tgz#c2418fbfd7a29f4d4f70ff4cea604d4b64c46407"
   dependencies:
@@ -2663,7 +2663,7 @@ seq-queue@0.0.5:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/seq-queue/-/seq-queue-0.0.5.tgz#d56812e1c017a6e4e7c3e3a37a1da6d78dd3c93e"
 
-sequelize@^4.38.0:
+sequelize@^4.38.1:
   version "4.38.1"
   resolved "https://registry.yarnpkg.com/sequelize/-/sequelize-4.38.1.tgz#4fd832c33c0ff44a6516bf7133b1ec6311fa4297"
   dependencies:
