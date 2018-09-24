@@ -37,6 +37,7 @@
     "helmet": "^3.13.0",
     "jsonwebtoken": "^8.3.0",
     "mysql2": "^1.6.1",
+    "nodemon": "^1.18.4",
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
     "passport-google-oauth": "^1.0.0",
