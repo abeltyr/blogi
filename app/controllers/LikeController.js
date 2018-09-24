@@ -8,8 +8,8 @@ exports.like = (req, res) => {
   db.like
     .findOrCreate({
       where: {
-        blog_id: req.body.blog_id,
-        user_id: req.user_id
+        blog_id: req.params.blog_id,
+        user_id: req.user.id
       }
     })
     .then(doc => {
@@ -27,7 +27,7 @@ exports.unlike = (req, res) => {
       db.like
         .destroy({
           where: {
-            id: req.params.id
+            id: req.params.like_id
           }
         })
         .then(dat => {
