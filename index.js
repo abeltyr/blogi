@@ -5,6 +5,8 @@ const express = require("express");
 
 //  don't console.log, instead use the debug module
 const debug = require("debug")("app");
+const blog = require("./routes/blog");
+const user = require("./routes/user");
 
 // import the routers
 const blog = require("./routes/blog");
@@ -30,6 +32,7 @@ app.use("/api/blog", blog);
 app.use("/api", like);
 app.use("/api/", follow);
 app.use("/api/feedback", FeedBack);
+app.use("/user", user);
 // Start listening for connections
 app.listen(process.env.PORT ? process.env.PORT : 3000, err => {
   if (err) debug("can't start the app");

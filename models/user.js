@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const blog = sequelize.define(
-    "blog",
+  const user = sequelize.define(
+    "user",
     {
       id: {
         allowNull: false,
@@ -9,30 +9,28 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4
       },
-      user_id: {
-        type: DataTypes.UUID,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
-      },
-      title: {
+      google_id: {
         type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
+        allowNull: true
       },
-      category: {
+      facebook_id: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true
+      },
+      full_name: {
+        type: DataTypes.STRING,
         validate: {
           notEmpty: true
         }
       },
-      content: {
-        type: DataTypes.TEXT,
-        allowNull: false,
+      image: {
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: true
+        }
+      },
+      email: {
+        type: DataTypes.STRING,
         validate: {
           notEmpty: true
         }
@@ -40,10 +38,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {}
   );
-
-  // eslint-disable-next-line no-unused-vars
-  blog.associate = function(models) {
+  user.associate = function(models) {
     // associations can be defined here
   };
-  return blog;
+  return user;
 };

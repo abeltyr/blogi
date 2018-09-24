@@ -1,4 +1,4 @@
-//const hpp = require('hpp');
+// const hpp = require('hpp');
 const helmet = require("helmet");
 
 function securityMiddleware(server) {
