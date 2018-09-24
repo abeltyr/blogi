@@ -31,7 +31,7 @@ app.use("/api", like);
 app.use("/api/", follow);
 app.use("/api/feedback", FeedBack);
 // Start listening for connections
-app.listen(process.env.APP_PORT ? process.env.APP_PORT : 3000, err => {
+app.listen(process.env.PORT ? process.env.PORT : 3000, err => {
   if (err) debug("can't start the app");
-  debug(`starting ${process.env.APP_NAME} on port ${process.env.APP_PORT}`);
+  debug(`starting ${process.env.APP_NAME} on port ${process.env.PORT}`);
 });
