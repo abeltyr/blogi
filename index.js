@@ -5,10 +5,9 @@ const express = require("express");
 
 //  don't console.log, instead use the debug module
 const debug = require("debug")("app");
-const blog = require("./routes/blog");
-const user = require("./routes/user");
 
 // import the routers
+const user = require("./routes/user");
 const blog = require("./routes/blog");
 const like = require("./routes/like");
 const follow = require("./routes/follow");
