@@ -1,5 +1,4 @@
 const express = require("express");
-const db = require("../models");
 const app = express.Router();
 const BLOG = require("../app/controllers/BlogController");
 
