@@ -1,6 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
-  const blog = sequelize.define(
-    "blog",
+  // eslint-disable-next-line
+  const follow_user = sequelize.define(
+    "follow_user",
     {
       id: {
         allowNull: false,
@@ -9,29 +10,15 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4
       },
-      user_id: {
+      follower_id: {
         type: DataTypes.UUID,
         allowNull: false,
         validate: {
           notEmpty: true
         }
       },
-      title: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
-      },
-      category: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
-      },
-      content: {
-        type: DataTypes.TEXT,
+      followed_id: {
+        type: DataTypes.UUID,
         allowNull: false,
         validate: {
           notEmpty: true
@@ -41,8 +28,9 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   // eslint-disable-next-line
-  blog.associate = function(models) {
+  follow_user.associate = models => {
     // associations can be defined here
   };
-  return blog;
+  // eslint-disable-next-line
+  return follow_user;
 };

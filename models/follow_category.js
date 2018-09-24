@@ -1,6 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
-  const blog = sequelize.define(
-    "blog",
+  // eslint-disable-next-line
+  const follow_category = sequelize.define(
+    "follow_category",
     {
       id: {
         allowNull: false,
@@ -16,22 +17,8 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: true
         }
       },
-      title: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
-      },
       category: {
         type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
-      },
-      content: {
-        type: DataTypes.TEXT,
         allowNull: false,
         validate: {
           notEmpty: true
@@ -41,8 +28,9 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   // eslint-disable-next-line
-  blog.associate = function(models) {
+  follow_category.associate = models => {
     // associations can be defined here
   };
-  return blog;
+  // eslint-disable-next-line
+  return follow_category;
 };
