@@ -247,7 +247,7 @@ exports.Add_favorite = (req, res) => {
         blog_id: req.body.blog_id
       }
     })
-    .then(doc => res.send(doc))
+    .then(doc => res.json(doc))
     .catch(er => {
       res.status(500).json(er.errors);
     });

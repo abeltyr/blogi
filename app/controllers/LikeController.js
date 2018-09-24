@@ -18,29 +18,39 @@ exports.like = (req, res) => {
       } else {
         res.status(422).json("you have already liked the blog");
       }
+    })
+    .catch(error => {
+      debug(error);
+      res.status(500).send("Internal Server Error");
     });
 };
 
 exports.unlike = (req, res) => {
-  db.like.findById(req.params.like_id).then(doc => {
-    if (req.user.id === doc.user_id) {
-      db.like
-        .destroy({
-          where: {
-            id: req.params.like_id
-          }
-        })
-        .then(dat => {
-          res.json(dat);
-        })
-        .catch(error => {
-          debug(error);
-          res.json(error);
-        });
-    } else {
-      res.status(401).json("Unauthorized attempt");
-    }
-  });
+  db.like
+    .findById(req.params.blog_id)
+    .then(doc => {
+      if (req.user.id === doc.user_id) {
+        db.like
+          .destroy({
+            where: {
+              id: req.params.blog_id
+            }
+          })
+          .then(dat => {
+            res.json(dat);
+          })
+          .catch(error => {
+            debug(error);
+            res.json(error);
+          });
+      } else {
+        res.status(401).json("Unauthorized attempt");
+      }
+    })
+    .catch(error => {
+      debug(error);
+      res.status(500).send("Internal Server Error");
+    });
 };
 exports.getLikeCount = (req, res) => {
   db.like
@@ -51,5 +61,9 @@ exports.getLikeCount = (req, res) => {
     })
     .then(doc => {
       res.json(doc.count);
+    })
+    .catch(error => {
+      debug(error);
+      res.status(500).send("Internal Server Error");
     });
 };
