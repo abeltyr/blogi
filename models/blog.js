@@ -23,6 +23,13 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: true
         }
       },
+      image: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true
+        }
+      },
       category: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -42,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   // eslint-disable-next-line no-unused-vars
-  blog.associate = function(models) {
+  blog.associate = models => {
     // associations can be defined here
   };
   return blog;
