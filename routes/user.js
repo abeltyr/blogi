@@ -1,6 +1,7 @@
 // require express and init the mini app
 const express = require("express");
 const debug = require("debug")("user");
+const moment = require("moment");
 
 const app = express.Router();
 
@@ -137,8 +138,8 @@ app.get("/google/callback", (req, res, next) => {
           // eslint-disable-next-line no-underscore-dangle
           image: user._json.image.url,
           email: user.emails[0].value,
-          issued_date: Date(),
-          expired_date: Date() // add the expire date for the token from the env
+          issued_date: moment().format(),
+          expired_date: moment().add(process.env.TokenLife, "hours") // add the expire date for the token from the env
         };
         return res.json({
           access_token: jwt.sign(body, process.env.SECRET),

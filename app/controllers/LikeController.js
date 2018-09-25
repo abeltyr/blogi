@@ -27,6 +27,7 @@ exports.like = (req, res) => {
 
 exports.unlike = (req, res) => {
   db.like
+    // todo change find by id to find by user id from token and blog id from request
     .findById(req.params.blog_id)
     .then(doc => {
       if (req.user.id === doc.user_id) {
