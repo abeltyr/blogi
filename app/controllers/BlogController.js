@@ -1,4 +1,4 @@
-const debug = require("debug")("app");
+const debug = require("debug")("error");
 /* this get the index from model and later is used
  *  to find the blog model
  */
@@ -14,23 +14,69 @@ exports.list_all = (req, res) => {
     })
     .catch(error => {
       debug(error);
-      res.status(500).send("Internal Server Error");
+      res.status(500).json("Internal Server Error");
     });
 };
 
 exports.blog_detail = (req, res) => {
   db.blog
-    .findOne({
-      where: {
-        id: req.params.id
-      }
-    })
+    .findById(req.params.id)
     .then(data => {
-      res.json(["data", data]);
+      db.like
+        .findAndCountAll({
+          where: {
+            blog_id: data.id
+          }
+        })
+        .then(doc => {
+          db.comment
+            .findAndCountAll({
+              where: {
+                blog_id: data.id
+              }
+            })
+            .then(comData => {
+              if (req.user) {
+                db.follow_user
+                  .findOne({
+                    where: {
+                      follower_id: req.user.id,
+                      followed_id: data.user_id
+                    }
+                  })
+                  .then(follower => {
+                    let following = 0;
+                    if (follower) {
+                      following = 1;
+                    } else {
+                      following = 0;
+                    }
+                    res.json([
+                      { data },
+                      { likes: doc.count },
+                      { comments: comData },
+                      { following }
+                    ]);
+                  })
+                  .catch(error => {
+                    debug(error);
+                    res
+                      .status(500)
+                      .send("Internal Server Error following user");
+                  });
+              } else {
+                res.json([
+                  { data },
+                  { likes: doc.count },
+                  { comments: comData }
+                ]);
+              }
+            });
+        });
     })
     .catch(error => {
       debug(error);
-      res.status(500).send("Internal Server Error");
+      res.status(422).json("unprocessable entry");
     });
 };
 
@@ -49,7 +95,7 @@ exports.list_Category = (req, res) => {
     })
     .catch(error => {
       debug(error);
-      res.status(500).send("Internal Server Error");
+      res.status(500).json("Internal Server Error");
     });
 };
 
@@ -68,7 +114,7 @@ exports.list_Title = (req, res) => {
     })
     .catch(error => {
       debug(error);
-      res.status(500).send("Internal Server Error");
+      res.status(500).json("Internal Server Error");
     });
 };
 
@@ -88,13 +134,13 @@ exports.blog_User = (req, res) => {
     })
     .catch(error => {
       debug(error);
-      res.status(500).send("Internal Server Error");
+      res.status(500).json("Internal Server Error");
     });
 };
 
 /** create a new blog if it went well the created blog
- * data is send back if there are error like there being empty
- * data being send it shows an error
+ * data is json back if there are error like there being empty
+ * data being json it shows an error
  */
 
 exports.New_blog = (req, res) => {
@@ -106,10 +152,11 @@ exports.New_blog = (req, res) => {
         user_id: req.user.id,
         title: req.body.title,
         category: req.body.category,
-        content: req.body.content
+        content: req.body.content,
+        image: req.body.image
       }
     })
-    .then(doc => res.send(doc))
+    .then(doc => res.json(doc))
     .catch(er => {
       debug(er);
       res.status(500).json(er.errors);
@@ -117,14 +164,15 @@ exports.New_blog = (req, res) => {
 };
 
 /** Update a blog by finding thr blog by id if it went well the created blog
- * data is send back if there are error like there being empty
- * data being send it shows an error
+ * data is json back if there are error like there being empty
+ * data being json it shows an error
  */
 
 exports.Update_blog = (req, res) => {
   let CTitle = "";
   let CCategory = "";
   let CContent = "";
+  let Cimage = "";
 
   /** TODO add the a way to make update available only for the user who
    *  blogged the article     *
@@ -139,6 +187,7 @@ exports.Update_blog = (req, res) => {
       CTitle = da.title;
       CCategory = da.category;
       CContent = da.content;
+      Cimage = da.image;
       /**
        * here we check if the there data being sent has changed or not and
        * if the blog being edited user_id match the id of the user logged in
@@ -147,7 +196,8 @@ exports.Update_blog = (req, res) => {
         if (
           CTitle === req.body.title &&
           CCategory === req.body.category &&
-          CContent === req.body.content
+          CContent === req.body.content &&
+          Cimage === req.body.image
         ) {
           res
             .status(400)
@@ -162,7 +212,8 @@ exports.Update_blog = (req, res) => {
               {
                 title: req.body.title,
                 category: req.body.category,
-                content: req.body.content
+                content: req.body.content,
+                image: req.body.image
               },
               {
                 where: {
@@ -188,8 +239,8 @@ exports.Update_blog = (req, res) => {
 };
 
 /** Delete a blog by finding thr blog by idif it went well the created blog
- * data is send back if there are error like there being empty
- * data being send it shows an error
+ * data is json back if there are error like there being empty
+ * data being json it shows an error
  */
 
 exports.Delete_blog = (req, res) => {
@@ -265,7 +316,7 @@ exports.get_favorite = (req, res) => {
     })
     .catch(error => {
       debug(error);
-      res.status(500).send("Internal Server Error");
+      res.status(500).json("Internal Server Error");
     });
 };
 
@@ -334,7 +385,7 @@ exports.get_bookmark = (req, res) => {
     })
     .catch(error => {
       debug(error);
-      res.status(500).send("Internal Server Error");
+      res.status(500).json("Internal Server Error");
     });
 };
 

@@ -1,9 +1,5 @@
 {
-  "extends": ["airbnb", "prettier"],
-  "plugins": ["prettier"],
-  "rules": {
-    "prettier/prettier": ["error"]
-  },
+  "extends": ["prettier", "airbnb-base"],
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 6
