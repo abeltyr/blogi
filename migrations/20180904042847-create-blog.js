@@ -24,6 +24,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      like: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
       content: {
         type: Sequelize.TEXT,
         allowNull: false

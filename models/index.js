@@ -40,4 +40,16 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+// Relations
+db.comment.belongsTo(db.blog, { foreignKey: "blog_id", sourceKey: "id" });
+db.blog.hasMany(db.comment, { foreignKey: "blog_id", sourceKey: "id" });
+db.like.belongsTo(db.blog, { foreignKey: "blog_id", sourceKey: "id" });
+db.blog.hasMany(db.like, { foreignKey: "blog_id", sourceKey: "id" });
+// db.readlater.belongsTo(db.blog, {foreignKey: 'user_id', sourceKey: 'user_id'});
+// db.blog.hasMany(db.readlater, {foreignKey: 'user_id', sourceKey: 'user_id'});
+// db.favorites.belongsTo(db.blog, {foreignKey: 'user_id', sourceKey: 'user_id'});
+// db.blog.hasMany(db.favorites, {foreignKey: 'user_id', sourceKey: 'user_id'});
+db.blog.belongsTo(db.user, { foreignKey: "user_id", sourceKey: "id" });
+db.user.hasMany(db.blog, { foreignKey: "user_id", sourceKey: "id" });
+
 module.exports = db;

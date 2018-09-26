@@ -30,6 +30,13 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: true
         }
       },
+      like: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notEmpty: true
+        }
+      },
       category: {
         type: DataTypes.STRING,
         allowNull: false,
