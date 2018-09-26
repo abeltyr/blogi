@@ -166,7 +166,7 @@ exports.Update_blog = (req, res) => {
   let CContent = "";
   let Cimage = "";
 
-  /** TODO add the a way to make update available only for the user who
+  /**
    *  blogged the article     *
    */
   db.blog
@@ -236,7 +236,7 @@ exports.Update_blog = (req, res) => {
  */
 
 exports.Delete_blog = (req, res) => {
-  /** TODO add the a way to make update available only for the user who
+  /**
    *  blogged the article     *
    */
   db.blog
@@ -277,7 +277,7 @@ exports.Delete_blog = (req, res) => {
  */
 
 exports.Add_favorite = (req, res) => {
-  /** TODO add the a way to make update available only for the user who
+  /**
    *
    *  blogged the article     *
    */
@@ -313,7 +313,7 @@ exports.get_favorite = (req, res) => {
 };
 
 exports.Delete_favorite = (req, res) => {
-  /** TODO add the a way to make update available only for the user who
+  /**
    *  blogged the article     *
    */
   db.favorites
@@ -382,10 +382,8 @@ exports.get_bookmark = (req, res) => {
 };
 
 exports.Delete_bookmark = (req, res) => {
-  /** TODO add the a way to make update available only for the user who
-   *  blogged the article     *
+  /** blogged the article
    */
-
   db.readlater
     .findOne({
       where: {

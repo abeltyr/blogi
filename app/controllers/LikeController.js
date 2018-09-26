@@ -42,8 +42,12 @@ exports.like = (req, res) => {
 
 exports.unlike = (req, res) => {
   db.like
-    // todo change find by id to find by user id from token and blog id from request
-    .findById(req.params.blog_id)
+    .find({
+      where: {
+        user_id: req.user.id,
+        blog_id: req.params.blog_id
+      }
+    })
     .then(doc => {
       if (req.user.id === doc.user_id) {
         db.blog.findById(doc.blog_id).then(data => {
@@ -61,7 +65,8 @@ exports.unlike = (req, res) => {
         db.like
           .destroy({
             where: {
-              id: req.params.blog_id
+              user_id: req.user.id,
+              blog_id: req.params.blog_id
             }
           })
           .then(dat => {
