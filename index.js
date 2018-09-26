@@ -2,7 +2,7 @@
 // node modules
 const bodyParser = require("body-parser");
 const express = require("express");
-
+const cors = require("cors");
 //  don't console.log, instead use the debug module
 const debug = require("debug")("app");
 
@@ -17,6 +17,8 @@ const security = require("./app/middlewares/security");
 
 // initialize the express app
 const app = express();
+
+app.use(cors());
 
 debug("starting server ...");
 
