@@ -36,41 +36,25 @@ exports.blog_detail = (req, res) => {
               }
             })
             .then(comData => {
-              if (req.user) {
-                db.follow_user
-                  .findOne({
-                    where: {
-                      follower_id: req.user.id,
-                      followed_id: data.user_id
-                    }
-                  })
-                  .then(follower => {
-                    let following = 0;
-                    if (follower) {
-                      following = 1;
-                    } else {
-                      following = 0;
-                    }
-                    res.json([
-                      { data },
-                      { likes: doc.count },
-                      { comments: comData },
-                      { following }
-                    ]);
-                  })
-                  .catch(error => {
-                    debug(error);
-                    res
-                      .status(500)
-                      .send("Internal Server Error following user");
-                  });
-              } else {
+              db.user.findById(data.user_id).then(Udata => {
                 res.json([
-                  { data },
-                  { likes: doc.count },
-                  { comments: comData }
+                  {
+                    data
+                  },
+                  {
+                    likes: doc.count
+                  },
+                  {
+                    comments: comData
+                  },
+                  {
+                    User: {
+                      name: Udata.full_name,
+                      image: Udata.image
+                    }
+                  }
                 ]);
-              }
+              });
             });
         });
     })
@@ -123,11 +107,18 @@ exports.list_Title = (req, res) => {
  */
 
 exports.blog_User = (req, res) => {
-  db.blog
-    .findAndCountAll({
-      where: {
-        user_id: req.params.user
-      }
+  db.user
+    .findById(req.params.user, {
+      include: [
+        {
+          model: db.blog,
+          include: [
+            {
+              model: db.comment
+            }
+          ]
+        }
+      ]
     })
     .then(data => {
       res.json(["data", data]);
@@ -153,7 +144,8 @@ exports.New_blog = (req, res) => {
         title: req.body.title,
         category: req.body.category,
         content: req.body.content,
-        image: req.body.image
+        image: req.body.image,
+        like: 0
       }
     })
     .then(doc => res.json(doc))
