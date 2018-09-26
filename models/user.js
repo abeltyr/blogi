@@ -19,26 +19,21 @@ module.exports = (sequelize, DataTypes) => {
       },
       full_name: {
         type: DataTypes.STRING,
-        validate: {
-          notEmpty: true
-        }
+        allowNull: true
       },
       image: {
         type: DataTypes.STRING,
-        validate: {
-          notEmpty: true
-        }
+        allowNull: true
       },
       email: {
         type: DataTypes.STRING,
-        validate: {
-          notEmpty: true
-        }
+        allowNull: true
       }
     },
     {}
   );
-  user.associate = function(models) {
+  // eslint-disable-next-line
+  user.associate = models => {
     // associations can be defined here
   };
   return user;
