@@ -40,7 +40,7 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-//Relations
+// Relations
 db.comment.belongsTo(db.blog, { foreignKey: "blog_id", sourceKey: "id" });
 db.blog.hasMany(db.comment, { foreignKey: "blog_id", sourceKey: "id" });
 db.like.belongsTo(db.blog, { foreignKey: "blog_id", sourceKey: "id" });

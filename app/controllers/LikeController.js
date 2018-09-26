@@ -26,7 +26,7 @@ exports.like = (req, res) => {
                 }
               }
             )
-            .then(Ldata => {
+            .then(() => {
               res.json("you have liked the blog");
             });
         });
