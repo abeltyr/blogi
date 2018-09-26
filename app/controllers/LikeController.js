@@ -14,7 +14,22 @@ exports.like = (req, res) => {
     })
     .then(doc => {
       if (doc[1] === true) {
-        res.json("you have liked the blog");
+        db.blog.findById(req.params.blog_id).then(data => {
+          db.blog
+            .update(
+              {
+                like: data.like + 1
+              },
+              {
+                where: {
+                  id: data.id
+                }
+              }
+            )
+            .then(Ldata => {
+              res.json("you have liked the blog");
+            });
+        });
       } else {
         res.status(422).json("you have already liked the blog");
       }
@@ -30,6 +45,18 @@ exports.unlike = (req, res) => {
     .findById(req.params.blog_id)
     .then(doc => {
       if (req.user.id === doc.user_id) {
+        db.blog.findById(doc.blog_id).then(data => {
+          db.blog.update(
+            {
+              like: data.like - 1
+            },
+            {
+              where: {
+                id: data.id
+              }
+            }
+          );
+        });
         db.like
           .destroy({
             where: {
