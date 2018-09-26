@@ -1,7 +1,6 @@
-"use strict";
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("users", {
+  up: (queryInterface, Sequelize) =>
+    queryInterface.createTable("users", {
       id: {
         allowNull: false,
         autoIncrement: false,
@@ -19,15 +18,15 @@ module.exports = {
       },
       full_name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       image: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       createdAt: {
         allowNull: false,
@@ -37,9 +36,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
-  },
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("users");
-  }
+    }),
+  // eslint-disable-next-line
+  down: (queryInterface, Sequelize) => queryInterface.dropTable("users")
 };
