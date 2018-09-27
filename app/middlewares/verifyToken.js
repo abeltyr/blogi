@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-//const time = require("moment");
+const mo = require("moment");
 
 function verifyToken(req, res, next) {
   if (req.headers.token) {
@@ -8,9 +8,9 @@ function verifyToken(req, res, next) {
         res.status(401).json("invalid token provided");
       }
       // todo add the expire date for the token to verify
-      // if (time(doc.expired_date) < time().now()) {
-      //   res.status(401).json("the token has expired");
-      // }
+      if (doc.expired_date.diff(mo(), "seconds") <= 0) {
+        res.status(401).json("the token has expired please issue a new one.");
+      }
       req.user = doc;
       next();
     });
