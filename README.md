@@ -13,7 +13,8 @@
     3, Change the .env.example to .env and set the environment variables
        inside it to your values.
     4, Run ./node_modules/.bin/sequelize db:migrate to create the tables used in the app
-    5, Finally run yarn start to fire-up the app
+    5, Finally run yarn start to fire-up the app and run yarn test
+       to see run the tests, but make sure to open the server first
 
 TIP : Check this [doc] for the routes with the specific methods
 

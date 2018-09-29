@@ -37,7 +37,7 @@ exports.New_comment = (req, res) => {
 };
 
 exports.Delete_comment = (req, res) => {
-  /** TODO add the a way to make update available only for the user who
+  /**
    *  blogged the article     *
    */
   db.comment

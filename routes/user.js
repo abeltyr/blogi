@@ -24,7 +24,13 @@ passport.use(
       clientID: process.env.FACEBOOK_APP_ID,
       clientSecret: process.env.FACEBOOK_APP_SECRET,
       callbackURL: "https://ethblogi1.herokuapp.com/user/facebook/callback",
-      profileFields: ["id", "displayName", "photos", "link", "email"]
+      profileFields: [
+        "id",
+        "displayName",
+        "photos.type(large)",
+        "link",
+        "email"
+      ]
     },
     (accessToken, refreshToken, profile, cb) => {
       cb(null, profile);
@@ -60,8 +66,7 @@ app.get("/facebook/callback", (req, res, next) => {
   passport.authenticate(
     "facebook",
     {
-      scope: ["email", "public_profile"],
-      authType: "rerequest"
+      scope: ["email", "public_profile"]
     },
     // eslint-disable-next-line
     (err, user) => {
