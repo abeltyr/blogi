@@ -14,9 +14,6 @@ app
   .get("/like/:blog_id", like.like)
 
   // url for unlike
-  .get("/unlike/:blog_id", like.unlike)
-
-  // url for getting a like count for a specific blog
-  .get("/likes/:blog_id", like.getLikeCount);
+  .get("/unlike/:blog_id", like.unlike);
 
 module.exports = app;
