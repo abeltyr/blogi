@@ -5,7 +5,7 @@ const FOLLOW = require("../app/controllers/FollowController");
 const token = require("../app/middlewares/verifyToken");
 
 app
-  // .use((req, res, next) => token(req, res, next))
+  .use((req, res, next) => token(req, res, next))
 
   .post("/User/Followers", FOLLOW.No_Followers)
 

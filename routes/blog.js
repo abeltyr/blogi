@@ -19,7 +19,7 @@ app
 
   // apply middleware for protection
 
-  // .use((req, res, next) => token(req, res, next))
+  .use((req, res, next) => token(req, res, next))
 
   .post("/New", BLOG.New_blog)
 

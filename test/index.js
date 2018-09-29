@@ -53,7 +53,7 @@ describe("list a blog with the id specific id", function() {
   it("should return a json with one blog along the comments and like and writer of it", function(done) {
     chai
       .request("http://localhost:3000")
-      .get("/api/blog/e61bca26-7281-4726-817a-b59543db7637")
+      .get("/api/blog/4f3c00ac-319a-4c02-93a9-31c8c02dc91f")
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
@@ -83,6 +83,10 @@ describe("create a new blog", function() {
     chai
       .request("http://localhost:3000")
       .post("/api/blog/New")
+      .set(
+        "token",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
+      )
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
@@ -98,6 +102,10 @@ describe("update a blog", function() {
     chai
       .request("http://localhost:3000")
       .put("/api/blog/Update/e61bca26-7281-4726-817a-b59543db7637")
+      .set(
+        "token",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
+      )
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
@@ -112,6 +120,10 @@ describe("delete a blog", function() {
     chai
       .request("http://localhost:3000")
       .delete("/api/blog/Delete/e61bca26-7281-4726-817a-b59543db7637")
+      .set(
+        "token",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
+      )
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
@@ -119,14 +131,17 @@ describe("delete a blog", function() {
   });
 });
 
-//follow a category
+// add to favorite for authenticated user
 
-describe("follow a category", function() {
-  it("should ", function() {
-    // todo be successful if a user is authenticated
+describe("add to favorite", function() {
+  it("should add to blog to favorite for authenticated users", function() {
     chai
       .request("http://localhost:3000")
-      .post("/api/feedback/Follow/Category")
+      .post("/api/blog/Favorite")
+      .set(
+        "token",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
+      )
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
@@ -134,30 +149,323 @@ describe("follow a category", function() {
   });
 });
 
-// //follow a user
-// describe("follow a user", function () {
-//   it("should ", function () {
-//     // todo be successful if user is authenticate
-//   });
-// });
+// get all the favorite of authenticated user
 
-// //like a blog
-// describe("like a blog", function () {
-//   it("should return a json with a message attribute ", function () {
-//     // todo like a blog with a specific id by the authenticated user
-//   });
-// });
+describe("get all the favorite blog of authenticated user", function() {
+  it("should get all the blog from favorite of the authenticated users", function() {
+    chai
+      .request("http://localhost:3000")
+      .get("/api/blog/get/Favorite")
+      .set(
+        "token",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
+      )
+      .end(function(err, res) {
+        expect(res.status).to.be.equal(200);
+        done();
+      });
+  });
+});
 
-// // unlike a blog
-// describe("unlike a blog", function () {
-//   it("should unlike a blog and the count of likes for that blog is reduced by one", function () {
-//     // todo unlike a blog by the authenticated user
-//   });
-// });
+// Delete the blog from the favorite of authenticated user
 
-// // add to read-letter for authenticated user
-// describe("add to read-latter", function () {
-//   it("should add to the authenticated users read-latter", function () {
-//     // todo
-//   });
-// });
+describe("Delete the blog from the Favorite for authenticated user", function() {
+  it("should Delete the blog from the Favorite for the authenticated users", function() {
+    chai
+      .request("http://localhost:3000")
+      .delete("/api/blog/Delete/Favorite/:id")
+      .set(
+        "token",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
+      )
+      .end(function(err, res) {
+        expect(res.status).to.be.equal(200);
+        done();
+      });
+  });
+});
+
+// add to read-letter for authenticated user
+
+describe("add to read-letter", function() {
+  it("should add to blog to read-letter for authenticated users", function() {
+    chai
+      .request("http://localhost:3000")
+      .post("/api/blog/readLater")
+      .set(
+        "token",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
+      )
+      .end(function(err, res) {
+        expect(res.status).to.be.equal(200);
+        done();
+      });
+  });
+});
+// get all the favorite of authenticated user
+
+describe("get all the readLater blog of authenticated user", function() {
+  it("should get all the blog from readLater of the authenticated users", function() {
+    chai
+      .request("http://localhost:3000")
+      .get("/api/blog/get/readLater")
+      .set(
+        "token",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
+      )
+      .end(function(err, res) {
+        expect(res.status).to.be.equal(200);
+        done();
+      });
+  });
+});
+
+// Delete the blog from the favorite of authenticated user
+
+describe("Delete the blog from the readLater for authenticated user", function() {
+  it("should Delete the blog from the readLater for the authenticated users", function() {
+    chai
+      .request("http://localhost:3000")
+      .delete("/api/blog/Delete/readLater/:id")
+      .set(
+        "token",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
+      )
+      .end(function(err, res) {
+        expect(res.status).to.be.equal(200);
+        done();
+      });
+  });
+});
+
+//get the number of followers user have
+
+describe("get the number of followers the user have", function() {
+  it("should get the number of followers the user have ", function() {
+    chai
+      .request("http://localhost:3000")
+      .post("/api/User/Followers")
+      .set(
+        "token",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
+      )
+      .end(function(err, res) {
+        expect(res.status).to.be.equal(200);
+        done();
+      });
+  });
+});
+
+// get all the user the authenticated user follow
+
+describe("get all the user the authenticated user follow", function() {
+  it("should get all the user the authenticated user follow", function() {
+    chai
+      .request("http://localhost:3000")
+      .get("/api/Following/User")
+      .set(
+        "token",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
+      )
+      .end(function(err, res) {
+        expect(res.status).to.be.equal(200);
+        done();
+      });
+  });
+});
+
+// get all the Category the authenticated User follow
+
+describe("get all the Category the authenticated User follow", function() {
+  it("should get all the Category the authenticated User follow", function() {
+    chai
+      .request("http://localhost:3000")
+      .get("/api/Following/Category")
+      .set(
+        "token",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
+      )
+      .end(function(err, res) {
+        expect(res.status).to.be.equal(200);
+        done();
+      });
+  });
+});
+
+// follow a category
+
+describe("follow a category", function() {
+  it("should add the category as followed ", function() {
+    chai
+      .request("http://localhost:3000")
+      .post("/api/Follow/Category")
+      .set(
+        "token",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
+      )
+      .end(function(err, res) {
+        expect(res.status).to.be.equal(200);
+        done();
+      });
+  });
+});
+
+// follow a User
+
+describe("follow a User", function() {
+  it("should add the user as followed ", function() {
+    chai
+      .request("http://localhost:3000")
+      .post("/api/Follow/User")
+      .set(
+        "token",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
+      )
+      .end(function(err, res) {
+        expect(res.status).to.be.equal(200);
+        done();
+      });
+  });
+});
+// Unfollow a Category
+
+describe("Unfollow a Category", function() {
+  it("should Unfollow the Category selected  ", function() {
+    chai
+      .request("http://localhost:3000")
+      .delete("/api/Unfollow/Category")
+      .set(
+        "token",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
+      )
+      .end(function(err, res) {
+        expect(res.status).to.be.equal(200);
+        done();
+      });
+  });
+});
+
+// Unfollow a User
+
+describe("Unfollow a User", function() {
+  it("should Unfollow the user selected  ", function() {
+    chai
+      .request("http://localhost:3000")
+      .delete("/api/Unfollow/User")
+      .set(
+        "token",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
+      )
+      .end(function(err, res) {
+        expect(res.status).to.be.equal(200);
+        done();
+      });
+  });
+});
+
+// check if the Category if followed by the authenticated user
+
+describe("check if the Category if followed by the authenticated user", function() {
+  it("should check if the Category if followed by the authenticated user ", function() {
+    chai
+      .request("http://localhost:3000")
+      .post("/api/Check/Category")
+      .set(
+        "token",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
+      )
+      .end(function(err, res) {
+        expect(res.status).to.be.equal(200);
+        done();
+      });
+  });
+});
+
+// check if the User if followed by the authenticated user
+
+describe("check if the User if followed by the authenticated user", function() {
+  it("should check if the User if followed by the authenticated user ", function() {
+    chai
+      .request("http://localhost:3000")
+      .post("/api/Check/User")
+      .set(
+        "token",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
+      )
+      .end(function(err, res) {
+        expect(res.status).to.be.equal(200);
+        done();
+      });
+  });
+});
+
+// if the user is authenticated can comment on blog
+
+describe("authenticated user can comment on blog", function() {
+  it("should be able to comment on the blog if the user is authenticated", function() {
+    chai
+      .request("http://localhost:3000")
+      .post("/api/feedback/New")
+      .set(
+        "token",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
+      )
+      .end(function(err, res) {
+        expect(res.status).to.be.equal(200);
+        done();
+      });
+  });
+});
+
+// if the user is authenticated can delete comment on blog made by him/her
+
+describe("authenticated user can delete comment on blog made by him/her", function() {
+  it("should be able delete comment on blog made by him/her if the user is authenticated", function() {
+    chai
+      .request("http://localhost:3000")
+      .delete("/api/feedback/Delete/:id")
+      .set(
+        "token",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
+      )
+      .end(function(err, res) {
+        expect(res.status).to.be.equal(200);
+        done();
+      });
+  });
+});
+
+//like a blog
+describe("like a blog", function() {
+  it("should return a json with a message attribute ", function() {
+    // todo like a blog with a specific id by the authenticated user
+    chai
+      .request("http://localhost:3000")
+      .get("/api/like/:blog_id")
+      .set(
+        "token",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
+      )
+      .end(function(err, res) {
+        expect(res.status).to.be.equal(200);
+        done();
+      });
+  });
+});
+
+// unlike a blog
+describe("unlike a blog", function() {
+  it("should unlike a blog and the count of likes for that blog is reduced by one", function() {
+    chai
+      .request("http://localhost:3000")
+      .get("/api/unlike/:blog_id")
+      .set(
+        "token",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
+      )
+      .end(function(err, res) {
+        expect(res.status).to.be.equal(200);
+        done();
+      });
+  });
+});
