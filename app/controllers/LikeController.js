@@ -64,7 +64,7 @@ exports.unlike = (req, res) => {
               },
               {
                 where: {
-                  id: doc.blog_id
+                  id: data.id
                 }
               }
             );
@@ -88,8 +88,10 @@ exports.unlike = (req, res) => {
         })
         .catch(error => {
           debug(error);
-          res.status(500).send("Internal Server Error");
+          res.status(500).send("haven't like the blog");
         });
+    } else {
+      res.status(404).json("blog not found");
     }
   });
 };
