@@ -1,22 +1,6 @@
 const debug = require("debug")("comments");
 const db = require("../../models");
 
-exports.list_all = (req, res) => {
-  db.comment
-    .findAndCountAll({
-      where: {
-        blog_id: req.params.id
-      }
-    })
-    .then(data => {
-      res.json(["data", data]);
-    })
-    .catch(error => {
-      debug(error);
-      res.status(500).send("Internal Server Error");
-    });
-};
-
 exports.New_comment = (req, res) => {
   db.comment
     .findOne({
