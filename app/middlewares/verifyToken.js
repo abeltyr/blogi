@@ -8,7 +8,7 @@ function verifyToken(req, res, next) {
         res.status(401).json("invalid token provided");
       }
       // todo add the expire date for the token to verify
-      if (doc.expired_date.diff(mo(), "seconds") <= 0) {
+      if (mo(doc.expired_date).diff(mo(), "seconds") <= 0) {
         res.status(401).json("the token has expired please issue a new one.");
       }
       req.user = doc;
