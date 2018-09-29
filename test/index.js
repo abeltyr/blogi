@@ -4,7 +4,8 @@ const chai = require("chai"),
 chai.use(chaiHTTP);
 
 let expect = chai.expect;
-
+const token =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M";
 // list all blog
 
 describe("list all blog", function() {
@@ -83,10 +84,7 @@ describe("create a new blog", function() {
     chai
       .request("http://localhost:3000")
       .post("/api/blog/New")
-      .set(
-        "token",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
-      )
+      .set("token", token)
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
@@ -102,10 +100,7 @@ describe("update a blog", function() {
     chai
       .request("http://localhost:3000")
       .put("/api/blog/Update/e61bca26-7281-4726-817a-b59543db7637")
-      .set(
-        "token",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
-      )
+      .set("token", token)
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
@@ -120,10 +115,7 @@ describe("delete a blog", function() {
     chai
       .request("http://localhost:3000")
       .delete("/api/blog/Delete/e61bca26-7281-4726-817a-b59543db7637")
-      .set(
-        "token",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
-      )
+      .set("token", token)
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
@@ -138,10 +130,7 @@ describe("add to favorite", function() {
     chai
       .request("http://localhost:3000")
       .post("/api/blog/Favorite")
-      .set(
-        "token",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
-      )
+      .set("token", token)
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
@@ -156,10 +145,7 @@ describe("get all the favorite blog of authenticated user", function() {
     chai
       .request("http://localhost:3000")
       .get("/api/blog/get/Favorite")
-      .set(
-        "token",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
-      )
+      .set("token", token)
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
@@ -174,10 +160,7 @@ describe("Delete the blog from the Favorite for authenticated user", function() 
     chai
       .request("http://localhost:3000")
       .delete("/api/blog/Delete/Favorite/:id")
-      .set(
-        "token",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
-      )
+      .set("token", token)
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
@@ -192,10 +175,7 @@ describe("add to read-letter", function() {
     chai
       .request("http://localhost:3000")
       .post("/api/blog/readLater")
-      .set(
-        "token",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
-      )
+      .set("token", token)
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
@@ -209,10 +189,7 @@ describe("get all the readLater blog of authenticated user", function() {
     chai
       .request("http://localhost:3000")
       .get("/api/blog/get/readLater")
-      .set(
-        "token",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
-      )
+      .set("token", token)
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
@@ -227,10 +204,7 @@ describe("Delete the blog from the readLater for authenticated user", function()
     chai
       .request("http://localhost:3000")
       .delete("/api/blog/Delete/readLater/:id")
-      .set(
-        "token",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
-      )
+      .set("token", token)
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
@@ -245,10 +219,7 @@ describe("get the number of followers the user have", function() {
     chai
       .request("http://localhost:3000")
       .post("/api/User/Followers")
-      .set(
-        "token",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
-      )
+      .set("token", token)
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
@@ -263,10 +234,7 @@ describe("get all the user the authenticated user follow", function() {
     chai
       .request("http://localhost:3000")
       .get("/api/Following/User")
-      .set(
-        "token",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
-      )
+      .set("token", token)
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
@@ -281,10 +249,7 @@ describe("get all the Category the authenticated User follow", function() {
     chai
       .request("http://localhost:3000")
       .get("/api/Following/Category")
-      .set(
-        "token",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
-      )
+      .set("token", token)
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
@@ -299,10 +264,7 @@ describe("follow a category", function() {
     chai
       .request("http://localhost:3000")
       .post("/api/Follow/Category")
-      .set(
-        "token",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
-      )
+      .set("token", token)
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
@@ -317,10 +279,7 @@ describe("follow a User", function() {
     chai
       .request("http://localhost:3000")
       .post("/api/Follow/User")
-      .set(
-        "token",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
-      )
+      .set("token", token)
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
@@ -334,10 +293,7 @@ describe("Unfollow a Category", function() {
     chai
       .request("http://localhost:3000")
       .delete("/api/Unfollow/Category")
-      .set(
-        "token",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
-      )
+      .set("token", token)
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
@@ -352,10 +308,7 @@ describe("Unfollow a User", function() {
     chai
       .request("http://localhost:3000")
       .delete("/api/Unfollow/User")
-      .set(
-        "token",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
-      )
+      .set("token", token)
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
@@ -370,10 +323,7 @@ describe("check if the Category if followed by the authenticated user", function
     chai
       .request("http://localhost:3000")
       .post("/api/Check/Category")
-      .set(
-        "token",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
-      )
+      .set("token", token)
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
@@ -388,10 +338,7 @@ describe("check if the User if followed by the authenticated user", function() {
     chai
       .request("http://localhost:3000")
       .post("/api/Check/User")
-      .set(
-        "token",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
-      )
+      .set("token", token)
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
@@ -406,10 +353,7 @@ describe("authenticated user can comment on blog", function() {
     chai
       .request("http://localhost:3000")
       .post("/api/feedback/New")
-      .set(
-        "token",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
-      )
+      .set("token", token)
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
@@ -424,10 +368,7 @@ describe("authenticated user can delete comment on blog made by him/her", functi
     chai
       .request("http://localhost:3000")
       .delete("/api/feedback/Delete/:id")
-      .set(
-        "token",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
-      )
+      .set("token", token)
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
@@ -442,10 +383,7 @@ describe("like a blog", function() {
     chai
       .request("http://localhost:3000")
       .get("/api/like/:blog_id")
-      .set(
-        "token",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
-      )
+      .set("token", token)
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
@@ -459,10 +397,7 @@ describe("unlike a blog", function() {
     chai
       .request("http://localhost:3000")
       .get("/api/unlike/:blog_id")
-      .set(
-        "token",
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwZDM0MThlLTFmNTMtNGI1Mi05NGYxLWQ3ZDkyOWRjMzljYSIsImdvb2dsZV9pZCI6IjExMDEwMjg4MjU3ODU4NTAxOTI1MCIsImZ1bGxfbmFtZSI6IkFiZWwgTGFtZXNnZW4iLCJpbWFnZSI6Imh0dHBzOi8vbGg1Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tY0JwLVc5cjlSb00vQUFBQUFBQUFBQUkvQUFBQUFBQUFBQkEvWVRiODc3NDNkcW8vcGhvdG8uanBnP3N6PTUwIiwiZW1haWwiOiJhYmVsbGFtZXNnZW4yMUBnbWFpbC5jb20iLCJpYXQiOjE1Mzc1MzcyNjJ9.RQRlEIcEoVoZ8vjC2Ly9bY9gM5dNfOJPiA-PYC-Mr6M"
-      )
+      .set("token", token)
       .end(function(err, res) {
         expect(res.status).to.be.equal(200);
         done();
