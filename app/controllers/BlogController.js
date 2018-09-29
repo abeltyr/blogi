@@ -60,7 +60,7 @@ exports.blog_detail = (req, res) => {
     })
     .catch(error => {
       debug(error);
-      res.status(422).json("unprocessable entry");
+      res.status(404).json("BLOG NOT FOUND");
     });
 };
 
