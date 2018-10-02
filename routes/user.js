@@ -99,10 +99,12 @@ app.get("/facebook/callback", (req, res, next) => {
                 image: user.photos[0].value,
                 email: "null"
               };
-              return res.json({
-                access_token: jwt.sign(body, process.env.SECRET),
-                type: "Bearer"
-              });
+              return res.redirect(
+                `${process.env.FRONT_END_URL}/Sign-in?authorization=${jwt.sign(
+                  body,
+                  process.env.SECRET
+                )}&type=Bearer`
+              );
             });
         })
         .catch(error => {
@@ -152,17 +154,20 @@ app.get("/google/callback", (req, res, next) => {
               issued_date: moment(),
               expired_date: moment().add(process.env.TokenLife, "hour") // add the expire date for the token from the env
             };
-            return res.json({
-              access_token: jwt.sign(body, process.env.SECRET),
-              type: "Bearer"
-            });
+            // todo test the return to have the token in query params
+            return res.redirect(
+              `${process.env.FRONT_END_URL}/Sign-in?authorization=${jwt.sign(
+                body,
+                process.env.SECRET
+              )}&type=Bearer`
+            );
+          })
+          .catch(error => {
+            debug(error);
+            return res.status("500").json("internal server error");
           });
-      })
-      .catch(error => {
-        debug(error);
-        return res.status("500").json("internal server error");
-      });
-  })(req, res, next);
+      })(req, res, next);
+  });
 });
 
 module.exports = app;

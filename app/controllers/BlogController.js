@@ -135,8 +135,6 @@ exports.blog_User = (req, res) => {
  */
 
 exports.New_blog = (req, res) => {
-  // refactor using findorcreate instead of checking to see the titile and content exists
-
   db.blog
     .findOrCreate({
       where: {
