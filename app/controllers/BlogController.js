@@ -8,7 +8,13 @@ const db = require("../../models");
 
 exports.list_all = (req, res) => {
   db.blog
-    .findAndCountAll()
+    .findAndCountAll({
+      include: [
+        {
+          model: db.user
+        }
+      ]
+    })
     .then(data => {
       res.json(["data", data]);
     })
