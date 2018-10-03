@@ -2,8 +2,9 @@ const jwt = require("jsonwebtoken");
 const mo = require("moment");
 
 function verifyToken(req, res, next) {
-  if (req.headers.token) {
-    jwt.verify(req.headers.token, process.env.SECRET, (err, doc) => {
+  if (req.headers.authorization) {
+    let token = req.headers.authorization.split(" ");
+    jwt.verify(token[1], process.env.SECRET, (err, doc) => {
       if (err) {
         res.status(401).json("invalid token provided");
       }

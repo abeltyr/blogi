@@ -97,10 +97,12 @@ app.get("/facebook/callback", (req, res, next) => {
                 facebook_id: user.id,
                 full_name: user.displayName,
                 image: user.photos[0].value,
-                email: "null"
+                email: "null",
+                issued_date: moment(),
+                expired_date: moment().add(process.env.TokenLife, "day")
               };
               return res.redirect(
-                `${process.env.FRONT_END_URL}/Sign-in?authorization=${jwt.sign(
+                `${process.env.FRONT_END_URL}/sign-in?authorization=${jwt.sign(
                   body,
                   process.env.SECRET
                 )}&type=Bearer`
@@ -152,11 +154,11 @@ app.get("/google/callback", (req, res, next) => {
               image: user._json.image.url,
               email: user.emails[0].value,
               issued_date: moment(),
-              expired_date: moment().add(process.env.TokenLife, "hour") // add the expire date for the token from the env
+              expired_date: moment().add(process.env.TokenLife, "day") // add the expire date for the token from the env
             };
             // todo test the return to have the token in query params
             return res.redirect(
-              `${process.env.FRONT_END_URL}/Sign-in?authorization=${jwt.sign(
+              `${process.env.FRONT_END_URL}/sign-in?authorization=${jwt.sign(
                 body,
                 process.env.SECRET
               )}&type=Bearer`
