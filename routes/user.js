@@ -24,13 +24,7 @@ passport.use(
       clientID: process.env.FACEBOOK_APP_ID,
       clientSecret: process.env.FACEBOOK_APP_SECRET,
       callbackURL: "https://ethblogi1.herokuapp.com/user/facebook/callback",
-      profileFields: [
-        "id",
-        "displayName",
-        "photos.type(large)",
-        "link",
-        "email"
-      ]
+      profileFields: ["id", "displayName", "picture", "link", "email"]
     },
     (accessToken, refreshToken, profile, cb) => {
       cb(null, profile);
