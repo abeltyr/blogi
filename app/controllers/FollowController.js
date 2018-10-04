@@ -9,7 +9,9 @@ exports.No_Followers = (req, res) => {
       }
     })
     .then(data => {
-      res.json(["data", data]);
+      res.json({
+        followers: data.count
+      });
     })
     .catch(error => {
       debug(error);
@@ -25,7 +27,9 @@ exports.Following_user = (req, res) => {
       }
     })
     .then(data => {
-      res.json(["data", data]);
+      res.json({
+        following: data.count
+      });
     })
     .catch(error => {
       debug(error);
@@ -40,7 +44,9 @@ exports.Following_category = (req, res) => {
       }
     })
     .then(data => {
-      res.json(["data", data]);
+      res.json({
+        following: data.count
+      });
     })
     .catch(error => {
       debug(error);
