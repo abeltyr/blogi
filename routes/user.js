@@ -88,7 +88,7 @@ app.get("/facebook/callback", (req, res, next) => {
             )
             .then(() => {
               const body = {
-                user_id: doc[0].id,
+                id: doc[0].id,
                 full_name: user.displayName,
                 image: user.photos[0].value,
                 email: "null",
