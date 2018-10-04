@@ -37,7 +37,8 @@ passport.use(
     {
       clientID: process.env.GOOGLE_APP_ID,
       clientSecret: process.env.GOOGLE_APP_SECRET,
-      callbackURL: "https://ethblogi1.herokuapp.com/user/google/callback"
+      // callbackURL: "https://ethblogi1.herokuapp.com/user/google/callback"
+      callbackURL: "http://localhost:4000/user/google/callback"
     },
     (accessToken, refreshToken, profile, done) => done(null, profile)
   )
@@ -115,9 +116,9 @@ app.get("/facebook/callback", (req, res, next) => {
 
 app.get("/google/callback", (req, res, next) => {
   // eslint-disable-next-line consistent-return
+
   passport.authenticate("google", (err, user) => {
-    if (err) return next(err);
-    if (!user) return res.redirect("/user/google/login");
+    if (err) return debug(err);
     db.user
       .findOrCreate({
         where: {
@@ -129,7 +130,6 @@ app.get("/google/callback", (req, res, next) => {
           .update(
             {
               full_name: user.displayName,
-              // eslint-disable-next-line no-underscore-dangle
               image: user._json.image.url,
               email: user.emails[0].value
             },
@@ -139,30 +139,29 @@ app.get("/google/callback", (req, res, next) => {
               }
             }
           )
-          .then(() => {
+          .then(docu => {
             const body = {
-              id: doc[0].id,
-              google_id: user.id,
-              full_name: user.displayName,
-              // eslint-disable-next-line no-underscore-dangle
-              image: user._json.image.url,
-              email: user.emails[0].value,
+              id: docu.id,
+              full_name: docu.full_name,
+              image: docu.image,
+              email: docu.email,
               issued_date: moment(),
-              expired_date: moment().add(process.env.TokenLife, "day") // add the expire date for the token from the env
+              expired_date: moment().add(process.env.TokenLife, "day")
             };
+
             return res.redirect(
-              `localhost:3000/sign-in?authorization=${jwt.sign(
+              `${process.env.FRONT_END_URL}/sign-in?authorization=${jwt.sign(
                 body,
                 process.env.SECRET
-              )}&type=Bearer`
+              )}`
             );
-          })
-          .catch(error => {
-            debug(error);
-            return res.status(500).json("internal server error");
           });
-      })(req, res, next);
-  });
+      })
+      .catch(err => {
+        debug(err);
+        return res.status(500).json("internal server error");
+      });
+  })(req, res, next);
 });
 
 module.exports = app;
