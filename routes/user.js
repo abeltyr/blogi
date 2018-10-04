@@ -65,7 +65,7 @@ app.get("/facebook/callback", (req, res, next) => {
     // eslint-disable-next-line
     (err, user) => {
       if (err) return next(err);
-      if (!user) return res.redirect("/user/login");
+      if (!user) return res.redirect("/user/facebook/login");
       db.user
         .findOrCreate({
           where: {
@@ -117,7 +117,8 @@ app.get("/google/callback", (req, res, next) => {
   // eslint-disable-next-line consistent-return
   passport.authenticate("google", (err, user) => {
     if (err) return next(err);
-    if (!user) return res.redirect("/user/login");
+    if (!user) return res.redirect("/user/google/login");
+    console.log("user", user);
     db.user
       .findOrCreate({
         where: {
@@ -150,7 +151,6 @@ app.get("/google/callback", (req, res, next) => {
               issued_date: moment(),
               expired_date: moment().add(process.env.TokenLife, "day") // add the expire date for the token from the env
             };
-            // todo test the return to have the token in query params
             return res.redirect(
               `${process.env.FRONT_END_URL}/sign-in?authorization=${jwt.sign(
                 body,
@@ -160,7 +160,7 @@ app.get("/google/callback", (req, res, next) => {
           })
           .catch(error => {
             debug(error);
-            return res.status("500").json("internal server error");
+            return res.status(500).json("internal server error");
           });
       })(req, res, next);
   });
