@@ -114,12 +114,10 @@ app.get("/facebook/callback", (req, res, next) => {
 // google callback
 
 app.get("/google/callback", (req, res, next) => {
-  debug("this is from the google callback");
   // eslint-disable-next-line consistent-return
   passport.authenticate("google", (err, user) => {
     if (err) return next(err);
     if (!user) return res.redirect("/user/google/login");
-    debug(user);
     db.user
       .findOrCreate({
         where: {
@@ -153,7 +151,7 @@ app.get("/google/callback", (req, res, next) => {
               expired_date: moment().add(process.env.TokenLife, "day") // add the expire date for the token from the env
             };
             return res.redirect(
-              `${process.env.FRONT_END_URL}/sign-in?authorization=${jwt.sign(
+              `localhost:3000/sign-in?authorization=${jwt.sign(
                 body,
                 process.env.SECRET
               )}&type=Bearer`
