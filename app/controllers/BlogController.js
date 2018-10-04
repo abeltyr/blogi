@@ -78,7 +78,12 @@ exports.list_Category = (req, res) => {
     .findAndCountAll({
       where: {
         category: req.params.category
-      }
+      },
+      include: [
+        {
+          model: db.user
+        }
+      ]
     })
     .then(data => {
       res.json(["data", data]);
@@ -97,7 +102,12 @@ exports.list_Title = (req, res) => {
     .findAndCountAll({
       where: {
         title: req.params.title
-      }
+      },
+      include: [
+        {
+          model: db.user
+        }
+      ]
     })
     .then(data => {
       res.json(["data", data]);
