@@ -29,6 +29,9 @@ security(app);
 app.use(bodyParser.json());
 
 // plug the routers here for the individual components
+app.get("/a", (req, res) => {
+  res.send(req.query);
+});
 app.use("/api/blog", blog);
 app.use("/api", like);
 app.use("/api/", follow);
