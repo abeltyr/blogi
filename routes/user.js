@@ -114,11 +114,12 @@ app.get("/facebook/callback", (req, res, next) => {
 // google callback
 
 app.get("/google/callback", (req, res, next) => {
+  debug("this is from the google callback");
   // eslint-disable-next-line consistent-return
   passport.authenticate("google", (err, user) => {
     if (err) return next(err);
     if (!user) return res.redirect("/user/google/login");
-    console.log("user", user);
+    debug(user);
     db.user
       .findOrCreate({
         where: {
