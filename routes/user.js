@@ -24,7 +24,7 @@ passport.use(
       clientID: process.env.FACEBOOK_APP_ID,
       clientSecret: process.env.FACEBOOK_APP_SECRET,
       callbackURL: "https://ethblogi1.herokuapp.com/user/facebook/callback",
-      profileFields: ["id", "displayName", "photos", "link", "email"]
+      profileFields: ["id", "displayName", "picture", "link", "email"]
     },
     (accessToken, refreshToken, profile, cb) => {
       cb(null, profile);
@@ -60,8 +60,7 @@ app.get("/facebook/callback", (req, res, next) => {
   passport.authenticate(
     "facebook",
     {
-      scope: ["email", "public_profile"],
-      authType: "rerequest"
+      scope: ["email", "public_profile"]
     },
     // eslint-disable-next-line
     (err, user) => {
@@ -89,15 +88,19 @@ app.get("/facebook/callback", (req, res, next) => {
             )
             .then(() => {
               const body = {
-                facebook_id: user.id,
+                id: doc[0].id,
                 full_name: user.displayName,
                 image: user.photos[0].value,
-                email: "null"
+                email: "null",
+                issued_date: moment(),
+                expired_date: moment().add(process.env.TokenLife, "day")
               };
-              return res.json({
-                access_token: jwt.sign(body, process.env.SECRET),
-                type: "Bearer"
-              });
+              return res.redirect(
+                `${process.env.FRONT_END_URL}/sign-in?authorization=${jwt.sign(
+                  body,
+                  process.env.SECRET
+                )}&type=Bearer`
+              );
             });
         })
         .catch(error => {
@@ -145,19 +148,22 @@ app.get("/google/callback", (req, res, next) => {
               image: user._json.image.url,
               email: user.emails[0].value,
               issued_date: moment(),
-              expired_date: moment().add(process.env.TokenLife, "hour") // add the expire date for the token from the env
+              expired_date: moment().add(process.env.TokenLife, "day") // add the expire date for the token from the env
             };
-            return res.json({
-              access_token: jwt.sign(body, process.env.SECRET),
-              type: "Bearer"
-            });
+            // todo test the return to have the token in query params
+            return res.redirect(
+              `${process.env.FRONT_END_URL}/sign-in?authorization=${jwt.sign(
+                body,
+                process.env.SECRET
+              )}&type=Bearer`
+            );
+          })
+          .catch(error => {
+            debug(error);
+            return res.status("500").json("internal server error");
           });
-      })
-      .catch(error => {
-        debug(error);
-        return res.status("500").json("internal server error");
-      });
-  })(req, res, next);
+      })(req, res, next);
+  });
 });
 
 module.exports = app;

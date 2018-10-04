@@ -56,7 +56,7 @@ describe("list a blog with the id specific id", function() {
       .request("http://localhost:3000")
       .get("/api/blog/4f3c00ac-319a-4c02-93a9-31c8c02dc91f")
       .end(function(err, res) {
-        expect(res.status).to.be.equal(200);
+        expect(res.status).to.be.equal(404);
         done();
       });
   });
