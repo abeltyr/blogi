@@ -95,3 +95,27 @@ exports.unlike = (req, res) => {
     }
   });
 };
+exports.check_like = (req, res) => {
+  db.like
+    .findOne({
+      where: {
+        user_id: req.user.id,
+        blog_id: req.params.blog_id
+      }
+    })
+    .then(data => {
+      if (data) {
+        res.json({
+          liked: 1
+        });
+      } else {
+        res.json({
+          liked: 0
+        });
+      }
+    })
+    .catch(error => {
+      debug(error);
+      res.status(500).send("Internal Server Error");
+    });
+};
