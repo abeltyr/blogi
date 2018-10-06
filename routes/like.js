@@ -15,7 +15,9 @@ app
 
   // url for unlike
   .get("/unlike/:blog_id", like.unlike)
+
   // url for checking if the user has liked the blog
+
   .get("/check/like/:blog_id", like.check_like);
 
 module.exports = app;
