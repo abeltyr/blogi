@@ -70,3 +70,28 @@ exports.Delete_comment = (req, res) => {
       res.status(404).json(["this blog is not found"]);
     });
 };
+
+exports.check_comment = (req, res) => {
+  db.comment
+    .findOne({
+      where: {
+        user_id: req.user.id,
+        blog_id: req.params.blog_id
+      }
+    })
+    .then(data => {
+      if (data) {
+        res.json({
+          commented: 1
+        });
+      } else {
+        res.json({
+          commented: 0
+        });
+      }
+    })
+    .catch(error => {
+      debug(error);
+      res.status(500).send("Internal Server Error");
+    });
+};

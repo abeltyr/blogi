@@ -105,7 +105,7 @@ app.get("/facebook/callback", (req, res, next) => {
         })
         .catch(error => {
           debug(error);
-          res.status(500).json(err);
+          res.status(500).json("internal server error");
         });
     }
   )(req, res, next);
@@ -118,6 +118,7 @@ app.get("/google/callback", (req, res, next) => {
 
   passport.authenticate("google", (err, user) => {
     if (err) return debug(err);
+    if (!user) return res.redirect("/user/google/login");
     db.user
       .findOrCreate({
         where: {
@@ -138,21 +139,20 @@ app.get("/google/callback", (req, res, next) => {
               }
             }
           )
-          .then(docu => {
+          .then(() => {
             const body = {
-              id: docu.id,
-              full_name: docu.full_name,
-              image: docu.image,
-              email: docu.email,
+              id: doc[0].id,
+              full_name: user.displayName,
+              image: user._json.image.url,
+              email: user.emails[0].value,
               issued_date: moment(),
               expired_date: moment().add(process.env.TokenLife, "day")
             };
-
             return res.redirect(
               `${process.env.FRONT_END_URL}/sign-in?authorization=${jwt.sign(
                 body,
                 process.env.SECRET
-              )}`
+              )}&type=Bearer`
             );
           });
       })

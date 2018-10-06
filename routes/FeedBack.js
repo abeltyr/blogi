@@ -13,6 +13,10 @@ app
   /**
    *  this let you delete the comment by sending the comment id
    */
-  .delete("/Delete/:id", FEED.Delete_comment);
+  .delete("/Delete/:id", FEED.Delete_comment)
+  /**
+   *  this check if the user commented
+   */
+  .get("/check/comment/:blog_id", FEED.check_comment);
 
 module.exports = app;
